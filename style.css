@@ -24,3 +24,7 @@ main {
 .forecast{
 	padding: 0.3em
 }
+
+.weather-icon{
+    padding: 20px;
+}
