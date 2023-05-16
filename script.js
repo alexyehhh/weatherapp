@@ -21,10 +21,10 @@ function success(position){
     console.log(latitude, longitude);
 }
 const btn = document.getElementById('getWeatherBtn');
-btn.addEventListener("click", () => {
+btn.addEventListener("click", function() {
   // ------------------ CURRENT ------------------
   const xhr = new XMLHttpRequest(); //Defines the XMLHttp object
-  xhr.open("GET", `localhost:3000/weather/${latitude}/${longitude}`); // opens a get request to the website
+  xhr.open("GET", `http://localhost:3000/weather/${latitude}/${longitude}`); // opens a get request to the website
   xhr.send(); // sends the request
 
   xhr.onload = function() {
@@ -32,21 +32,21 @@ btn.addEventListener("click", () => {
 	  const body = JSON.parse(xhr.responseText); // Set body to the response text
     let temperature = body.temperature; // Parse the temperature from the response
     let weatherStatus = body.weatherStatus; // Parse the weather status from the response
-    document.getElementById("temperature").innerHTML = `Temperature: ${temperature}°F`;
+    document.getElementById("temperature").innerHTML = `Temperature: ${temperature}\u00B0F`;
     document.getElementById("weatherStatus").innerHTML = `Weather Status: ${weatherStatus}`;
   }
   // ------------------ 5-Day FORECAST ------------------
   const xhr2 = new XMLHttpRequest(); // Defines the XMLHttp object
-  xhr2.open("GET", `localhost:3000/forecast/${latitude}/${longitude}`); // opens a get request to the website
+  xhr2.open("GET", `http://localhost:3000/5day/${latitude}/${longitude}`); // opens a get request to the website
   xhr2.send();
   
   xhr2.onload = function() {
     //What’s wrong w/ this (Think about the format responseText is in and what format we need it in (stringify/parse)
 	  const body = JSON.parse(xhr2.responseText); // Set body to the response text
-    let forecast = body.forecast;
+    let forecast = body;
     let forecastElements = document.getElementsByClassName("forecast");
     for(let i = 0; i < forecast.length; i++){
-      forecastElements[i].innerHTML = `${forecast[i].dayName}: ${forecast[i].temp}°F`;
+      forecastElements[i].innerHTML = forecast[i].dayName + ": " + forecast[i].temp + "\u00B0F";
     }
   }
 });
