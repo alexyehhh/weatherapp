@@ -8,8 +8,8 @@ window.onload = function() { //When the window loads (When the page loads)
     // Now, set the .date HTML text to our dateString
     document.getElementById('date').innerHTML = dateString;
     if ("geolocation" in navigator) { // If the browser supports location
-		navigator.geolocation.getCurrentPosition(success); // Get position and call success function
-	} else { // If location does not exist, or if we deny permission
+		  navigator.geolocation.getCurrentPosition(success); // Get position and call success function
+	  } else { // If location does not exist, or if we deny permission
 	  console.log("Geolocation is not available in your browser."); 
 	}
 }
